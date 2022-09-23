@@ -1,0 +1,14 @@
+{
+    "author": "Thiago Bruno Vieira",
+    "name": "github-to-discord",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vercel dev"
+    },
+    "keywords": [],
+    "license": "ISC",
+    "dependencies": {
+        "node-fetch": "^3.2.10"
+    }
+}
