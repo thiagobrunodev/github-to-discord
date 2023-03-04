@@ -8,22 +8,23 @@ export default async function handler(request, response) {
         })
     }
 
-    const push = request.body
+    const body = request.body
+    const branchName = body.ref.replace(/^refs\/heads\//, '')
     
-    const commitCount = push.commits.length
+    const commitCount = body.commits.length
 
     const webhookRes = await fetch(webhooks[0], {
         method: 'POST',
         body: JSON.stringify({
             embeds: [
                 {
-                    title: `[${push.repository.name}#${push.ref.replace(/^refs\/heads\//, '')}] ${commitCount} ${commitCount > 1 ? 'Atualizações' : 'Atualização' }`,
-                    url: commitCount > 1 ? push.compare : push.commits[0].url,
-                    description: push.commits.map(commit => `**${commit.message}**\n[\`\`${commit.id.slice(0, 7)}\`\`](${commit.url}) - ${commit.author.username}\n`).join('\n'),
+                    title: `[${body.repository.name}#${branchName}] ${commitCount} ${commitCount > 1 ? 'Atualizações' : 'Atualização' }`,
+                    url: commitCount > 1 ? body.compare : body.commits[0].url,
+                    description: body.commits.map(commit => `**${commit.message}**\n[\`\`${commit.id.slice(0, 7)}\`\`](${commit.url}) - ${commit.author.username}\n`).join('\n'),
                     color: 0x2b2d31,
                     author: {
-                        name: push.sender.login,
-                        icon_url: push.sender.avatar_url
+                        name: body.sender.login,
+                        icon_url: body.sender.avatar_url
                     }
                 }
             ]
