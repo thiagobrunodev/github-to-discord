@@ -9,6 +9,8 @@ export default async function handler(request, response) {
     }
 
     const push = request.body
+    console.log(push)
+    
     const commitCount = push.commits.length
 
     const webhookRes = await fetch(webhooks[0], {
