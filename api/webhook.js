@@ -9,7 +9,6 @@ export default async function handler(request, response) {
     }
 
     const push = request.body
-    console.log(push)
     
     const commitCount = push.commits.length
 
@@ -18,7 +17,7 @@ export default async function handler(request, response) {
         body: JSON.stringify({
             embeds: [
                 {
-                    title: `[${push.repository.name}] ${commitCount} ${commitCount > 1 ? 'Atualizações' : 'Atualização' }`,
+                    title: `[${push.repository.name}#${push.ref.replace(/^refs\/heads\//, '')}] ${commitCount} ${commitCount > 1 ? 'Atualizações' : 'Atualização' }`,
                     url: commitCount > 1 ? push.compare : push.commits[0].url,
                     description: push.commits.map(commit => `**${commit.message}**\n[\`\`${commit.id.slice(0, 7)}\`\`](${commit.url}) - ${commit.author.username}\n`).join('\n'),
                     author: {
