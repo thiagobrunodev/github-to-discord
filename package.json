@@ -3,9 +3,7 @@
     "name": "github-to-discord",
     "version": "1.0.0",
     "type": "module",
-    "scripts": {
-        "dev": "vercel dev"
-    },
+    "scripts": {},
     "keywords": [],
     "license": "ISC",
     "dependencies": {
