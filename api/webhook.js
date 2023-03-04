@@ -20,6 +20,7 @@ export default async function handler(request, response) {
                     title: `[${push.repository.name}#${push.ref.replace(/^refs\/heads\//, '')}] ${commitCount} ${commitCount > 1 ? 'Atualizações' : 'Atualização' }`,
                     url: commitCount > 1 ? push.compare : push.commits[0].url,
                     description: push.commits.map(commit => `**${commit.message}**\n[\`\`${commit.id.slice(0, 7)}\`\`](${commit.url}) - ${commit.author.username}\n`).join('\n'),
+                    color: 0x2b2d31,
                     author: {
                         name: push.sender.login,
                         icon_url: push.sender.avatar_url
